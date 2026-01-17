@@ -4,9 +4,9 @@
 | Field | Value |
 |-------|-------|
 | **ID** | 004 |
-| **Status** | ready |
+| **Status** | done |
 | **Branch** | task/004 |
-| **Assigned** | |
+| **Assigned** | task/004 |
 | **Depends** | 002 |
 | **Blocked-By** | |
 | **Estimated** | 20 min |
@@ -18,10 +18,10 @@
 Create a module that checks if relative file paths exist on the filesystem. Resolves paths relative to the markdown file being checked.
 
 ## Acceptance Criteria
-- [ ] Function to check file path validity
-- [ ] Resolves relative to source file location
-- [ ] Handles anchor links (file.md#section)
-- [ ] Returns {path, valid, error}
+- [x] Function to check file path validity
+- [x] Resolves relative to source file location
+- [x] Handles anchor links (file.md#section)
+- [x] Returns {path, valid, error}
 
 ## Context Files
 - src/parser.js from 002
@@ -32,3 +32,6 @@ Create a module that checks if relative file paths exist on the filesystem. Reso
 ---
 
 ## Work Log
+
+### 2026-01-16 23:18 - Complete
+Created file-checker.js with checkFilePath() and checkFilePaths() functions. Strips anchor links before checking. Resolves paths relative to provided base path. Uses fs.existsSync for validation.
