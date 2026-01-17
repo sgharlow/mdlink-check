@@ -4,9 +4,9 @@
 | Field | Value |
 |-------|-------|
 | **ID** | 003 |
-| **Status** | ready |
+| **Status** | done |
 | **Branch** | task/003 |
-| **Assigned** | |
+| **Assigned** | task/003 |
 | **Depends** | 002 |
 | **Blocked-By** | |
 | **Estimated** | 30 min |
@@ -18,11 +18,11 @@
 Create a module that checks HTTP/HTTPS URLs for validity using HEAD requests. Should handle timeouts, redirects, and return status for each URL.
 
 ## Acceptance Criteria
-- [ ] Function to check single URL validity
-- [ ] Uses HEAD request (not GET)
-- [ ] 5 second timeout
-- [ ] Returns {url, valid, status, error}
-- [ ] Handles network errors gracefully
+- [x] Function to check single URL validity
+- [x] Uses HEAD request (not GET)
+- [x] 5 second timeout
+- [x] Returns {url, valid, status, error}
+- [x] Handles network errors gracefully
 
 ## Context Files
 - src/parser.js from 002
@@ -33,3 +33,6 @@ Create a module that checks HTTP/HTTPS URLs for validity using HEAD requests. Sh
 ---
 
 ## Work Log
+
+### 2026-01-16 23:15 - Complete
+Created url-checker.js with checkUrl() and checkUrls() functions. Uses Node.js http/https modules for HEAD requests. 5 second timeout. Returns {url, valid, status, error} object. Handles timeouts and network errors gracefully.
