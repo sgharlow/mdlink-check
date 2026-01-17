@@ -1,0 +1,14 @@
+{
+  "name": "mdlink-check",
+  "version": "1.0.0",
+  "description": "Check markdown files for broken links",
+  "main": "src/index.js",
+  "bin": {
+    "mdlink-check": "src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": ["markdown", "links", "checker", "cli"],
+  "license": "MIT"
+}
