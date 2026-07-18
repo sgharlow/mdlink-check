@@ -1,5 +1,5 @@
 {
-  "name": "mdlink-check",
+  "name": "@sgharlow/mdlink-check",
   "version": "1.0.0",
   "description": "Check markdown files for broken links — local file targets and HTTP(S) URLs, single file or whole directory",
   "main": "src/index.js",
