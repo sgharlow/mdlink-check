@@ -1,82 +1,28 @@
-# Project: [Your Project Name]
+# CLAUDE.md
 
-## Overview
-[Brief description of your project]
+## What this is
 
-## Tech Stack
-- [Technology 1]
-- [Technology 2]
+`mdlink-check` — a zero-dependency Node CLI that checks markdown files for broken links:
+relative file targets (verified on disk) and HTTP(S) URLs (HEAD/GET probes). Input is a file
+or a directory (recursed for `*.md`). Exit code 1 on any broken link — CI-friendly.
 
-## Development Commands
+## Commands
+
 ```bash
-npm install    # Install dependencies
-npm run dev    # Start dev server
-npm test       # Run tests
+npm test                    # syntax-check every src file + dogfood run against this README
+node src/index.js <path>    # run against a file or directory
 ```
 
-## Orchestra Lite - Multi-Agent Coordination
+## Layout
 
-This project uses Orchestra Lite for coordinated parallel development.
+`src/index.js` (CLI entry, shebang) · `src/parser.js` (markdown link extraction) ·
+`src/file-checker.js` (relative-target existence) · `src/url-checker.js` (HTTP probes).
 
-### Quick Start
-```
-/orchestra plan    - Break down the goal into tasks
-/orchestra work    - Claim and complete next task
-/orchestra status  - Check progress
-/orchestra done ID - Mark task complete
-```
+## Conventions
 
-### Key Files
-| File | Purpose |
-|------|---------|
-| `.orchestra/GOAL.md` | What we are building |
-| `.orchestra/PLAN.md` | High-level phases |
-| `.orchestra/TASKS.md` | Task board (Ready/In Progress/Done/Blocked) |
-| `.orchestra/DECISIONS.md` | Architectural decisions log |
-| `.orchestra/tasks/*.md` | Individual task details |
-| `.orchestra/done/*.md` | Completed task files |
-
-### Workflow Rules
-
-1. **Always work on a branch**: `git checkout -b task/XXX`
-2. **Load context first**: Read DECISIONS.md and dependency outputs before starting
-3. **One task at a time**: Finish or drop before claiming another
-4. **Update both files**: Task file AND TASKS.md stay in sync
-5. **Log decisions**: Any non-trivial technical choice goes in DECISIONS.md
-6. **Verify before done**: Check acceptance criteria and run tests
-
-### Task Lifecycle
-```
-ready ──→ in_progress ──→ done
-              │
-              ↓
-          blocked ──→ ready (when unblocked)
-```
-
-### Multi-Terminal Usage
-```
-Terminal 1 (Planning):     Terminal 2 (Worker):     Terminal 3 (Worker):
-  /orchestra plan            /orchestra work          /orchestra work
-  /orchestra status          /orchestra done 001      /orchestra done 002
-  /orchestra replan          /orchestra work          /orchestra work
-```
-
-### Important Conventions
-
-**Task IDs**: Three-digit numbers (001, 002, etc.)
-
-**Branch naming**: `task/XXX` where XXX is the task ID
-
-**Commit messages**: `[XXX] Description of change`
-
-**Decision IDs**: `DEC-XXX` sequential numbering
-
-### Context Loading (MANDATORY before work)
-
-Before starting any task, you MUST read:
-1. `.orchestra/DECISIONS.md` - All architectural decisions
-2. `.orchestra/done/[dependency-ids].md` - Output from dependency tasks
-3. The task's Context Files section
-
-This prevents context-blind mistakes and maintains consistency.
-
+- Zero runtime dependencies — keep it that way; it's the point of the tool.
+- Node >= 18 (built-in fetch).
+- Publishing: tag `v*` triggers `.github/workflows/release.yml` (npm publish with provenance;
+  needs the `NPM_TOKEN` repo secret). The `files` allowlist in package.json is the tarball —
+  update it if you add anything a user needs at runtime.
+- No `Co-Authored-By: Claude` trailers in commits (portfolio rule).

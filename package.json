@@ -1,14 +1,41 @@
 {
   "name": "mdlink-check",
   "version": "1.0.0",
-  "description": "Check markdown files for broken links",
+  "description": "Check markdown files for broken links — local file targets and HTTP(S) URLs, single file or whole directory",
   "main": "src/index.js",
   "bin": {
     "mdlink-check": "src/index.js"
   },
-  "scripts": {
-    "start": "node src/index.js"
+  "files": [
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
   },
-  "keywords": ["markdown", "links", "checker", "cli"],
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --check src/index.js && node --check src/parser.js && node --check src/file-checker.js && node --check src/url-checker.js && node src/index.js README.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sgharlow/mdlink-check.git"
+  },
+  "homepage": "https://github.com/sgharlow/mdlink-check#readme",
+  "bugs": {
+    "url": "https://github.com/sgharlow/mdlink-check/issues"
+  },
+  "author": "Steve Harlow (https://github.com/sgharlow)",
+  "keywords": [
+    "markdown",
+    "links",
+    "checker",
+    "cli",
+    "dead-links",
+    "link-checker",
+    "ci",
+    "docs"
+  ],
   "license": "MIT"
 }
