@@ -1,0 +1,22 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  node-check:
+    name: Syntax + self-check (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Syntax-check every source file
+        run: for f in $(find src -name '*.js'); do node --check "$f"; done
+      - name: Dogfood — check this repo's own README links
+        run: node src/index.js README.md
